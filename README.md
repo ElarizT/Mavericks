@@ -27,9 +27,7 @@ graph TD
     E --> F[PDF Report Generator]
     F --> G[Download Polished Risk Report]
 🗂️ Folder Structure
-bash
-Copy
-Edit
+
 contract-risk-finder/
 │
 ├── app/                  # FastAPI app (main.py)
@@ -47,40 +45,23 @@ contract-risk-finder/
 └── README.md             # You're reading it!
 ⚙️ Setup Instructions
 ✅ Clone the Repo
-bash
-Copy
-Edit
 git clone https://github.com/yourusername/contract-risk-finder.git
 cd contract-risk-finder
 ✅ Create Virtual Environment
-bash
-Copy
-Edit
+
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 ✅ Install Requirements
-bash
-Copy
-Edit
 pip install -r requirements.txt
 ✅ Run the API
-bash
-Copy
-Edit
 uvicorn app.main:app --reload
 Visit: http://127.0.0.1:8000/docs for Swagger UI.
 
 🧪 Sample API Usage (cURL)
-bash
-Copy
-Edit
 curl -X 'POST' \
   'http://127.0.0.1:8000/analyze' \
   -F 'file=@path_to_your_contract.docx'
 📦 Docker (Optional)
-bash
-Copy
-Edit
 docker build -t contract-risk-finder .
 docker run -p 8000:8000 contract-risk-finder
 📑 License
