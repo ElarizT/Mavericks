@@ -1,0 +1,10 @@
+
+openai
+pytesseract
+PyPDF2
+transformers
+fastapi
+uvicorn
+python-multipart
+Pillow
+genai-agentos
