@@ -51,7 +51,6 @@ contract-risk-finder/
 git clone https://github.com/yourusername/contract-risk-finder.git
 cd contract-risk-finder
 ✅ Create Virtual Environment
-
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 ✅ Install Requirements
