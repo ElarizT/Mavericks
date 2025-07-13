@@ -1,0 +1,148 @@
+name: Build and Release CLI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - cli/**
+
+permissions:
+  contents: write # Needed to create releases and upload release assets
+
+jobs:
+  set_version_step_job:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set release version
+        id: set_version_step_job
+        run: |
+          echo "CLI_RELEASE_VERSION=$(./cli/get_release_version.sh)" >> "$GITHUB_OUTPUT"
+
+    outputs:
+      CLI_RELEASE_VERSION: ${{ steps.set_version_step_job.outputs.CLI_RELEASE_VERSION }}
+
+  build:
+    name: Build binaries
+    needs: set_version_step_job
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+        shell: bash
+
+      - name: Install uv (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+        shell: pwsh
+
+      - name: Verify uv installation
+        run: uv --version
+
+      - name: Build Unix CLI binary
+        if: runner.os == 'Linux'
+        working-directory: cli/
+        run: |
+          sudo apt-get update
+          sudo apt-get install curl -y
+
+          echo "Running install script..."
+          ./build_cli.sh
+          echo "Build script finished."
+
+          RELEASE_VERSION="${{needs.set_version_step_job.outputs.CLI_RELEASE_VERSION}}"
+          mv dist/genai dist/genai-unix-$RELEASE_VERSION.bin
+          echo BINARY_PATH="dist/genai-unix-$RELEASE_VERSION.bin" >> $GITHUB_ENV
+
+        shell: bash
+
+      - name: Download Dependency Walker
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $url = "https://dependencywalker.com/depends22_x64.zip"
+          $zipPath = "$env:RUNNER_TEMP\depends.zip"
+          $extractPath = "$env:LOCALAPPDATA\Nuitka\Nuitka\Cache\downloads\depends\x86_64"
+          Invoke-WebRequest -Uri $url -OutFile $zipPath
+          Expand-Archive -Path $zipPath -DestinationPath $extractPath
+
+      - name: Build Windows CLI Binary
+        if: runner.os == 'Windows'
+        working-directory: cli/
+        run: |
+          echo "Running powershell install script..."
+          uv venv
+          ./build_cli.ps1
+          echo "Build script finished."
+
+          Rename-Item -Path "cli.dist\genai.exe" -NewName "genai-windows-${{needs.set_version_step_job.outputs.CLI_RELEASE_VERSION}}.exe"
+          echo BINARY_PATH="cli.dist\genai-windows-${{needs.set_version_step_job.outputs.CLI_RELEASE_VERSION}}.exe" >> $GITHUB_ENV
+        shell: pwsh
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: genai-cli-artifacts-${{ runner.os }}
+          path: cli/${{ env.BINARY_PATH }}
+          retention-days: 1
+
+  build-and-release-unix:
+    name: Build and Release CLI Binary
+    runs-on: ubuntu-latest
+    if: success()
+    needs: [set_version_step_job, build]
+    steps:
+      - name: Set Version Info
+        id: version
+        run: |
+          echo "version=${{needs.set_version_step_job.outputs.CLI_RELEASE_VERSION}}" >> $GITHUB_OUTPUT
+          echo "tag=${{needs.set_version_step_job.outputs.CLI_RELEASE_VERSION}}" >> $GITHUB_OUTPUT
+          echo "branch=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+
+      - name: Download Unix Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: genai-cli-artifacts-Linux
+          path: artifacts
+          retention-days: 1
+
+      - name: Download Windows Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: genai-cli-artifacts-Windows
+          path: artifacts
+          retention-days: 1
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: GenAI CLI Build v${{needs.set_version_step_job.outputs.CLI_RELEASE_VERSION}}
+          body: |
+            Automated release of GenAI CLI version for Unix systems (Linux/Mac) and Windows executable
+          draft: false
+          prerelease: false
+          files: |
+            artifacts/genai-unix-${{needs.set_version_step_job.outputs.CLI_RELEASE_VERSION}}.bin
+            artifacts/cli.dist/genai-windows-${{needs.set_version_step_job.outputs.CLI_RELEASE_VERSION}}.exe
+          fail_on_unmatched_files: true

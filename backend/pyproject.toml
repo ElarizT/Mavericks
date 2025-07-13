@@ -1,0 +1,31 @@
+[project]
+name = "backend"
+version = "1.0.0"
+description = "Python Backend for GenAI Agentos infrastructure"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "genai-protocol",
+    "alembic>=1.15.1",
+    "asyncpg>=0.30.0",
+    "fastapi>=0.115.12",
+    "passlib>=1.7.4",
+    "pydantic-settings>=2.8.1",
+    "pyjwt>=2.10.1",
+    "python-multipart>=0.0.20",
+    "sqlalchemy>=2.0.39",
+    "uvicorn>=0.34.0",
+    "websockets>=15.0.1",
+    "bcrypt==4.0.1",
+    "cryptocode>=0.1",
+    "greenlet>=3.1.1", # explicit dependency required for mac
+    "tenacity>=9.1.2",
+    "mcp[cli]>=1.9.0",
+    "celery-singleton>=0.3.1",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "ruff>=0.11.2",
+]

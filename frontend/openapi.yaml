@@ -1,0 +1,668 @@
+openapi: 3.1.0
+info:
+  title: GenAI Backend
+  version: 0.1.0
+paths:
+  /api/login/access-token:
+    post:
+      tags:
+      - users
+      summary: User Login
+      operationId: user_login_api_login_access_token_post
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_user_login_api_login_access_token_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/register:
+    post:
+      tags:
+      - users
+      summary: Register User
+      operationId: register_user_api_register_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/agents/:
+    get:
+      tags:
+      - agents
+      summary: List All Agents
+      operationId: list_all_agents_api_agents__get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgentDTO'
+                title: Response List All Agents Api Agents  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/agents/{agent_id}:
+    get:
+      tags:
+      - agents
+      summary: Get Data
+      operationId: get_data_api_agents__agent_id__get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: agent_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Agent Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - agents
+      summary: Update Agent
+      operationId: update_agent_api_agents__agent_id__patch
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: agent_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Agent Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - agents
+      summary: Delete Agent
+      operationId: delete_agent_api_agents__agent_id__delete
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: agent_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Agent Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/agents/register:
+    post:
+      tags:
+      - agents
+      summary: Register Agent
+      operationId: register_agent_api_agents_register_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+  /api/agentflows/:
+    get:
+      tags:
+      - agentflows
+      summary: List All Agentflows
+      operationId: list_all_agentflows_api_agentflows__get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 0
+          title: Offset
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgentFlowDTO'
+                title: Response List All Agentflows Api Agentflows  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/agentflows/{agentflow_id}:
+    get:
+      tags:
+      - agentflows
+      summary: Get Agentflow Data
+      operationId: get_agentflow_data_api_agentflows__agentflow_id__get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: agentflow_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Agentflow Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentFlowDTO'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - agentflows
+      summary: Update Agentflow
+      operationId: update_agentflow_api_agentflows__agentflow_id__patch
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: agentflow_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Agentflow Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentFlowUpdate'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - agentflows
+      summary: Delete Agentflow
+      operationId: delete_agentflow_api_agentflows__agentflow_id__delete
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: agentflow_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Agentflow Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/agentflows/register-flow:
+    post:
+      tags:
+      - agentflows
+      summary: Register Agentflow
+      operationId: register_agentflow_api_agentflows_register_flow_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentFlowCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/AgentFlowDTO'
+                - type: 'null'
+                title: Response Register Agentflow Api Agentflows Register Flow Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+components:
+  schemas:
+    AgentCreate:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        input_parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          title: Input Parameters
+        output_parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          - type: 'null'
+          title: Output Parameters
+          default: {}
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - input_parameters
+      title: AgentCreate
+    AgentDTO:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        input_parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          title: Input Parameters
+        output_parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          - type: 'null'
+          title: Output Parameters
+          default: {}
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - input_parameters
+      - created_at
+      - updated_at
+      title: AgentDTO
+    AgentFlowCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        flow:
+          items:
+            $ref: '#/components/schemas/Flow'
+          type: array
+          title: Flow
+      type: object
+      required:
+      - name
+      - description
+      - flow
+      title: AgentFlowCreate
+    AgentFlowDTO:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        flow:
+          items:
+            $ref: '#/components/schemas/Flow'
+          type: array
+          title: Flow
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - name
+      - description
+      - flow
+      - id
+      - created_at
+      - updated_at
+      title: AgentFlowDTO
+    AgentFlowUpdate:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        flow:
+          items:
+            $ref: '#/components/schemas/Flow'
+          type: array
+          title: Flow
+      type: object
+      required:
+      - name
+      - description
+      - flow
+      title: AgentFlowUpdate
+    AgentUpdate:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        description:
+          type: string
+          title: Description
+        input_parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          title: Input Parameters
+        output_parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          - type: 'null'
+          title: Output Parameters
+          default: {}
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - input_parameters
+      title: AgentUpdate
+    Body_user_login_api_login_access_token_post:
+      properties:
+        grant_type:
+          anyOf:
+          - type: string
+            pattern: ^password$
+          - type: 'null'
+          title: Grant Type
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          title: Password
+        scope:
+          type: string
+          title: Scope
+          default: ''
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Secret
+      type: object
+      required:
+      - username
+      - password
+      title: Body_user_login_api_login_access_token_post
+    Flow:
+      properties:
+        agent_id:
+          type: string
+          title: Agent Id
+      type: object
+      required:
+      - agent_id
+      title: Flow
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    TokenDTO:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        token_type:
+          type: string
+          title: Token Type
+      type: object
+      required:
+      - access_token
+      - token_type
+      title: TokenDTO
+    UserCreate:
+      properties:
+        password:
+          type: string
+          title: Password
+        username:
+          type: string
+          title: Username
+      type: object
+      required:
+      - password
+      - username
+      title: UserCreate
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /api/login/access-token

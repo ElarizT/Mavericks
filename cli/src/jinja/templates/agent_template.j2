@@ -1,0 +1,31 @@
+import asyncio
+from typing import Annotated
+from genai_session.session import GenAISession
+from genai_session.utils.context import GenAIContext
+
+AGENT_JWT = "{{agent_token}}" # noqa: E501
+session = GenAISession(jwt_token=AGENT_JWT)
+
+
+@session.bind(
+    name="{{ agent_name }}",
+    description="{{ agent_description }}"
+)
+async def {{ agent_name }}(
+    agent_context: GenAIContext,
+    test_arg: Annotated[
+        str,
+        "This is a test argument. Your agent can have as many parameters as you want. Feel free to rename or adjust it to your needs.",  # noqa: E501
+    ],
+):
+    """{{ agent_description }}"""
+    return "Hello, World!"
+
+
+async def main():
+    print(f"Agent with token '{AGENT_JWT}' started")
+    await session.process_events()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+{{ "" }}
