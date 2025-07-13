@@ -14,7 +14,7 @@ openai_client = OpenAI(
     api_key=OPENAPI_KEY
 )
 
-AGENT_JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3M2EzMjNjNC0xNTUyLTQzMTctYTg3MC1iMGZmOTA0OThjNmEiLCJleHAiOjI1MzQwMjMwMDc5OSwidXNlcl9pZCI6ImUyMzFlYzg0LTc1NTYtNDVhOC05M2JkLWI5ZTdiZWY3MmNlZSJ9.1j1Y9NkE3yOdBABImw64IfHQVCoki0cur0r7RMegzR4" # noqa: E501
+AGENT_JWT = "" # noqa: E501
 session = GenAISession(jwt_token=AGENT_JWT)
 role=""" 
 # Personality

@@ -14,7 +14,7 @@ openai_client = OpenAI(
     api_key=OPENAPI_KEY
 )
 
-AGENT_JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMTMzN2NkMi05YTI0LTQxODktYWI5Ni1lM2NkNzgwMjhlYjMiLCJleHAiOjI1MzQwMjMwMDc5OSwidXNlcl9pZCI6ImUyMzFlYzg0LTc1NTYtNDVhOC05M2JkLWI5ZTdiZWY3MmNlZSJ9.sTrqPVG0WvDrCqANp9wfo_AjXSofTgKQR2Z9tXuagq8" # noqa: E501
+AGENT_JWT = "" # noqa: E501
 session = GenAISession(jwt_token=AGENT_JWT)
 
 

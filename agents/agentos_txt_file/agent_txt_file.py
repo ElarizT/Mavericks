@@ -2,7 +2,7 @@ import asyncio
 from typing import Any, Annotated
 from genai_session.session import GenAISession
  
-AGENT_JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTk0Y2VhMy01YTRiLTQ2MzItYmQ4Ny1lOTVmYmZiYzUzZDIiLCJleHAiOjI1MzQwMjMwMDc5OSwidXNlcl9pZCI6ImUyMzFlYzg0LTc1NTYtNDVhOC05M2JkLWI5ZTdiZWY3MmNlZSJ9.7fNm4OgnwDKXQYLpZ7c9a2mvdLLDWH7RTjIGoSzrw2c" # noqa: E501
+AGENT_JWT = "" # noqa: E501
 session = GenAISession(jwt_token=AGENT_JWT)
 
 
