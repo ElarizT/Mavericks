@@ -1,0 +1,33 @@
+# Core GenAI Framework
+genai-protocol>=1.0.9
+
+# Image Processing and OCR
+Pillow>=10.0.0
+opencv-python>=4.8.0
+pytesseract>=0.3.10
+numpy>=1.24.0
+
+# Web Search APIs
+tavily-python>=0.5.0
+duckduckgo-search>=6.0.0
+
+# Web Scraping and HTTP
+requests>=2.32.3
+aiohttp>=3.9.0
+beautifulsoup4>=4.12.0
+
+# Data Validation and Serialization
+pydantic>=2.11.1
+
+# Logging and Configuration
+loguru>=0.7.3
+python-dotenv>=1.1.0
+
+# Async Programming
+asyncio-mqtt>=0.13.0
+
+# Date and Time Utilities
+python-dateutil>=2.8.2
+
+# JSON and Data Processing
+orjson>=3.9.0
