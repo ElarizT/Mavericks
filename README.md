@@ -1,13 +1,16 @@
- 🤖 Contract Risk Finder
+ 🤖 **Lawco** - a Contract Risk Finder.
 
-**Contract Risk Finder** is an AI-powered tool that automatically analyzes legal contracts (PDF/DOCX), detects risky clauses, simplifies them into plain English using GenAI, and generates a polished PDF report.
+**Lawco** is an AI-powered tool that analyzes legal contracts, policies, terms and condition for you. 
+It detects risky clauses and highlights potential implications.
+It can simplify contracts into plain English and translate using GenAI, as well as generates a polished PDF report if required.
+It works with prompts and files (TXT/PDF/DOCX).
 
 ---
 
 ## 🚀 Features
 
-- 📄 **Text Extraction** from PDF and DOCX contracts
-- 🔍 **Clause Risk Detection** using Legal-BERT or fallback keyword detection
+- 📄 **Text Extraction** from PDF and DOCX or TXT contracts
+- 🔍 **Clause Risk Detection** using GenAI AgentOS or Legal-BERT or fallback keyword detection
 - ✨ **Plain English Simplification** with GenAI
 - 🧾 **Polished PDF Report Generation**
 - 🤝 **AgentOS Integration** (via `genai-agentos` and `master_agent`)
@@ -68,23 +71,16 @@ docker run -p 8000:8000 contract-risk-finder
 This project is licensed under the MIT License. See LICENSE file.
 
 💡 Future Enhancements
- Add multi-language support (e.g., Hindi)
-
+ Web browser extenstion to provide analysis in one click.
+ Add multi-language support (e.g., Hindi) ?
  Highlight risky clauses in uploaded documents
-
  Integration with contract signing platforms (e.g., DocuSign)
-
  Logging & audit reports
 
 🙌 Credits
 Built using:
-
-FastAPI
-
-HuggingFace Transformers (Legal-BERT)
-
-GenAI AgentOS (via master_agent)
-
-PyPDF2 / python-docx
-
-FPDF for PDF generation
+  GenAI AgentOS (via master_agent)
+  FastAPI
+  HuggingFace Transformers (Legal-BERT)
+  PyPDF2 / python-docx
+  FPDF for PDF generation
