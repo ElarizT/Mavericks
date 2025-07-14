@@ -29,6 +29,7 @@ graph TD
     D --> E
     E --> F[PDF Report Generator]
     F --> G[Download Polished Risk Report]
+```
 🗂️ Folder Structure
 
 contract-risk-finder/
@@ -46,6 +47,7 @@ contract-risk-finder/
 ├── requirements.txt      # Python dependencies
 ├── Dockerfile            # For containerized deployment
 └── README.md             # You're reading it!
+
 ⚙️ Setup Instructions
 ✅ Clone the Repo
 git clone https://github.com/yourusername/contract-risk-finder.git
@@ -59,6 +61,30 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 Visit: http://127.0.0.1:8000/docs for Swagger UI.
 
+### **Agent Framework**
+- **GenAI Protocol** - Custom agent communication protocol
+- **A2A SDK** (v0.2.5) - Agent-to-Agent communication
+- **MCP (Model Context Protocol)** (v1.9.0) - Tool integration
+
+## 📄 **Document Processing Stack**
+### **Text Extraction Libraries**
+- **PyMuPDF** (`fitz`) - PDF text extraction
+- **docx2txt** - Microsoft Word document processing
+- **pytesseract** - OCR text extraction from images
+- **OpenCV** (v4.8.0) - Image preprocessing for OCR
+- **Pillow** (v10.0.0) - Image manipulation
+
+### **Legal Document Analysis**
+- **Custom keyword-based risk detection** system
+- **6 risk categories**: Liability, Payment, Dispute, Termination, Privacy, Service
+- **Severity scoring** (LOW/MEDIUM/HIGH/CRITICAL)
+- **Risk density calculations**
+
+## 🌐 **Web & Search Integration**
+- **Tavily API** - Primary web search for legal context
+- **DuckDuckGo Search** - Fallback search engine
+- **BeautifulSoup4** - Web content parsing
+---
 🧪 Sample API Usage (cURL)
 curl -X 'POST' \
   'http://127.0.0.1:8000/analyze' \
