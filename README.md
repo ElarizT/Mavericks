@@ -24,6 +24,7 @@ It works with prompts and files (TXT/PDF/DOCX).
 ## 🧱 Folder Structure
 
 contract-risk-finder/
+
 ├── .github/ # GitHub workflows or issue templates
 
 ├── backend/ # Core backend logic (text extraction, model inference)
