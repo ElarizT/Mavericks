@@ -200,9 +200,16 @@ The frontend connects to these AgentOS backend endpoints:
 ## 💬 Usage
 
 ### 1. **Starting a Chat**
-- The app automatically authenticates using your AgentOS credentials
-- Type messages in the chat input at the bottom
-- The AI will respond in real-time via WebSocket
+- **Navigate to the Chat Page:**  
+  Go to the `/chat` route by visiting [http://localhost:3000/chat](http://localhost:3000/chat) in your browser.
+- **Or, Click the Chat Buttons:**  
+  You can also start a chat by clicking the chat buttons in the app interface (see screenshot below).
+<img width="1458" height="615" alt="ss" src="https://github.com/user-attachments/assets/f2cf0a1c-2f9c-436c-ba1b-5358f7b9334b" />
+
+
+- The app will automatically authenticate using your AgentOS credentials.
+- Type messages in the chat input at the bottom.
+- The AI will respond in real-time via WebSocket.
 
 ### 2. **Uploading Files**
 - Click the paperclip icon to attach files
