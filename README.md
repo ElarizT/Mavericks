@@ -50,10 +50,6 @@ Tesseract-OCR, pdfplumber, python-docx
 FPDF (PDF generation)
 
 
-## 📑 License
-MIT License. See LICENSE.
-
-
 ## 💡 Future Additions
 ✅ Browser extension (1-click risk highlight)
 ✅ Contract negotiation insights
@@ -62,7 +58,34 @@ MIT License. See LICENSE.
 ✅ Email alerts for risky clauses
 
 
+### **Agent Framework**
+- **GenAI Protocol** - Custom agent communication protocol
+- **A2A SDK** (v0.2.5) - Agent-to-Agent communication
+- **MCP (Model Context Protocol)** (v1.9.0) - Tool integration
+
+## 📄 **Document Processing Stack**
+### **Text Extraction Libraries**
+- **PyMuPDF** (`fitz`) - PDF text extraction
+- **docx2txt** - Microsoft Word document processing
+- **pytesseract** - OCR text extraction from images
+- **OpenCV** (v4.8.0) - Image preprocessing for OCR
+- **Pillow** (v10.0.0) - Image manipulation
+
+### **Legal Document Analysis**
+- **Custom keyword-based risk detection** system
+- **6 risk categories**: Liability, Payment, Dispute, Termination, Privacy, Service
+- **Severity scoring** (LOW/MEDIUM/HIGH/CRITICAL)
+- **Risk density calculations**
+
+## 🌐 **Web & Search Integration**
+- **Tavily API** - Primary web search for legal context
+- **DuckDuckGo Search** - Fallback search engine
+- **BeautifulSoup4** - Web content parsing
+
+
+## 📑 License
+MIT License. See LICENSE.
 
 ## ⚙️ Setup Instructions
 Use [text](README-infrastructure.md) for set and add your API keys for agents - "agent_lawco", "agent_translate"
- 
+
