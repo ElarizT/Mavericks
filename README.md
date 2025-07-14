@@ -9,77 +9,60 @@ It works with prompts and files (TXT/PDF/DOCX).
 
 ## 🚀 Features
 
-- 📄 **Text Extraction** from PDF and DOCX or TXT contracts
-- 🔍 **Clause Risk Detection** using GenAI AgentOS or Legal-BERT or fallback keyword detection
-- ✨ **Plain English Simplification** with GenAI
-- 🧾 **Polished PDF Report Generation**
-- 🤝 **AgentOS Integration** (via `genai-agentos` and `master_agent`)
-- 🔁 **Fallback Mode** for zero-shot clause identification
+📄 **Multi-format support**: Analyze .pdf, .docx, or .txt files
+🔍 **Clause risk detection** using GenAI
+✨ **Plain English clause simplification** via GenAI summarizer
+🧾 **Clean PDF report generation** - in progress
+🧠 **Fallback mode**: Rule-based keyword detection if model fails
+🖥️ **Frontend UI** for easy uploads & results
+🔌 **AgentOS integration** for orchestrated intelligence
+⚙️ **Dockerized microservices with docker-compose**
+🧪 **Unit + API tests** included
 
 ---
 
-## 🧠 Architecture
-
-```mermaid
-graph TD
-    A[User Uploads Contract] --> B[Extract Text (pdf/docx)]
-    B --> C[Risk Detector Agent]
-    C -->|None Found| D[Fallback Detector (Keywords)]
-    C -->|Risks Found| E[Clause Simplifier Agent (GenAI)]
-    D --> E
-    E --> F[PDF Report Generator]
-    F --> G[Download Polished Risk Report]
-🗂️ Folder Structure
+## 🧱 Folder Structure
 
 contract-risk-finder/
-│
-├── app/                  # FastAPI app (main.py)
-├── agents/               # Risk detector, simplifier, summarizer
-├── master_agent/         # GenAI invoke_model orchestrator
-├── genai-agentos/        # Optional AgentOS integration logic
-├── models/               # Optional pretrained model configs
-├── reports/              # Auto-generated PDFs (gitignored)
-├── utils/                # Helper functions
-├── data/                 # Optional static content
-├── temp/                 # Temp uploaded files (gitignored)
-│
-├── requirements.txt      # Python dependencies
-├── Dockerfile            # For containerized deployment
-└── README.md             # You're reading it!
-⚙️ Setup Instructions
-✅ Clone the Repo
-git clone https://github.com/yourusername/contract-risk-finder.git
-cd contract-risk-finder
-✅ Create Virtual Environment
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-✅ Install Requirements
-pip install -r requirements.txt
-✅ Run the API
-uvicorn app.main:app --reload
-Visit: http://127.0.0.1:8000/docs for Swagger UI.
+├── .github/ # GitHub workflows or issue templates
+├── backend/ # Core backend logic (text extraction, model inference)
+├── cli/ # Command-line interface (doc reading agent)
+├── frontend/ # React frontend for file upload & result view
+├── master-agent/ # GenAI orchestration logic
+├── router/ # FastAPI route handlers
+├── tests/ # Unit and integration tests
+├── .gitignore
+├── .pre-commit-config.yaml # Linting / formatting rules
+├── LICENSE
+├── Makefile
+├── README-infrastructure.md # Infrastructure-level setup
+├── README.md # You’re reading it!
+├── docker-compose.yml # All-in-one multi-container setup
 
-🧪 Sample API Usage (cURL)
-curl -X 'POST' \
-  'http://127.0.0.1:8000/analyze' \
-  -F 'file=@path_to_your_contract.docx'
-📦 Docker (Optional)
-docker build -t contract-risk-finder .
-docker run -p 8000:8000 contract-risk-finder
-📑 License
-This project is licensed under the MIT License. See LICENSE file.
+## Agent Workflow
+![alt text](architecture.png)
 
-💡 Future Enhancements
- Web browser extenstion to provide analysis in one click.
- Add multi-language support (e.g., Hindi) ?
- Highlight risky clauses in uploaded documents
- Integration with contract signing platforms (e.g., DocuSign)
- Logging & audit reports
+## 🧠 Powered By
+GenAI AgentOS (via master-agent)
+FastAPI, Uvicorn
+React.js
+Tesseract-OCR, pdfplumber, python-docx
+FPDF (PDF generation)
 
-🙌 Credits
-Built using:
-  GenAI AgentOS (via master_agent)
-  FastAPI
-  HuggingFace Transformers (Legal-BERT)
-  PyPDF2 / python-docx
-  FPDF for PDF generation
+
+## 📑 License
+MIT License. See LICENSE.
+
+
+## 💡 Future Additions
+✅ Browser extension (1-click risk highlight)
+✅ Contract negotiation insights
+✅ More Multi-language support (Hindi, Marathi, etc.)
+✅ Clause-to-law link mapping
+✅ Email alerts for risky clauses
+
+
+
+## ⚙️ Setup Instructions
+Use [text](README-infrastructure.md) for set and add your API keys for agents - "agent_lawco", "agent_translate"
+ 
