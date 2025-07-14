@@ -10,6 +10,7 @@ It works with prompts and files (TXT/PDF/DOCX).
 ## 🚀 Features
 
 📄 **Multi-format support**: Analyze .pdf, .docx, or .txt files
+
 🔍 **Clause risk detection** using GenAI
 ✨ **Plain English clause simplification** via GenAI summarizer
 🧾 **Clean PDF report generation** - in progress
