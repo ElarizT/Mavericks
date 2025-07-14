@@ -8,25 +8,41 @@ services:
     build:
       context: ./frontend
     ports:
-      - "${FRONTEND_PORT:-3000}:3000"
+      - '${FRONTEND_PORT:-3000}:3000'
     env_file: .env
     environment:
       - NODE_ENV=production
       - VITE_API_URL=http://backend:8000
       - VITE_WS_URL=ws://backend:8000
     networks:
-     - local-genai-network
+      - local-genai-network
     restart: unless-stopped
+
+  crf-frontend:
+    container_name: crf-frontend
+    build:
+      context: ./crf-fe
+    ports:
+      - '${CRF_FRONTEND_PORT:-3001}:3000'
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+      - NEXT_PUBLIC_WS_URL=ws://backend:8000
+    networks:
+      - local-genai-network
+    restart: unless-stopped
+    depends_on:
+      - backend
 
   router:
     container_name: genai-router
     build:
       context: ./router
     ports:
-      - "8080:8080"
+      - '8080:8080'
     env_file: .env
     networks:
-     - local-genai-network
+      - local-genai-network
     restart: unless-stopped
 
   master-agent:
@@ -35,7 +51,7 @@ services:
       context: ./master-agent
     env_file: .env
     networks:
-     - local-genai-network
+      - local-genai-network
     restart: unless-stopped
     depends_on:
       - router
@@ -45,10 +61,10 @@ services:
     build:
       context: ./backend
     ports:
-      - "8000:8000"
+      - '8000:8000'
     env_file: .env
     networks:
-     - local-genai-network
+      - local-genai-network
     restart: unless-stopped
     depends_on:
       - postgres
@@ -57,7 +73,7 @@ services:
     volumes:
       - shared-files-volume:${DEFAULT_FILES_FOLDER_NAME:-/files}
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - 'host.docker.internal:host-gateway'
 
   postgres:
     container_name: genai-postgres
@@ -65,7 +81,7 @@ services:
       context: ./backend/scripts
       dockerfile: ./Dockerfile.postgres
     ports:
-      - "5432:5432"
+      - '5432:5432'
     env_file:
       - .env
     environment:
@@ -73,18 +89,18 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
       - POSTGRES_DB=${POSTGRES_DB:-postgres}
     networks:
-     - local-genai-network
+      - local-genai-network
     restart: unless-stopped
     volumes:
-        - ./backend/scripts/postgres.conf:/etc/postgresql/postgresql.conf
-        - postgres-volume:/var/lib/postgresql/data
+      - ./backend/scripts/postgres.conf:/etc/postgresql/postgresql.conf
+      - postgres-volume:/var/lib/postgresql/data
   redis:
     container_name: genai-redis
     image: redis:7
     ports:
-      - "6379:6379"
+      - '6379:6379'
     networks:
-     - local-genai-network
+      - local-genai-network
     volumes:
       - redis-data:/data
 
@@ -97,27 +113,27 @@ services:
     env_file:
       - .env
     networks:
-     - local-genai-network
+      - local-genai-network
     restart: on-failure
-    command: ["alembic", "upgrade", "head"]
+    command: ['alembic', 'upgrade', 'head']
 
   celery:
     container_name: genai-celery-worker
-    build: 
+    build:
       context: ./backend
     command: celery -A src.celery.celery_app worker --loglevel=debug
     networks:
-     - local-genai-network
+      - local-genai-network
     depends_on:
       - redis
 
   celery-beat:
     container_name: genai-celery-beat
-    build: 
+    build:
       context: ./backend
     command: celery -A src.celery.celery_app beat --loglevel=debug
     networks:
-     - local-genai-network
+      - local-genai-network
     depends_on:
       - redis
 
