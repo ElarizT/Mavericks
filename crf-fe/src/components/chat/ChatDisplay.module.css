@@ -1,0 +1,190 @@
+Custom markdown styling for chat messages .markdownContent {
+  line-height: 1.6;
+}
+
+.markdownContent h1,
+.markdownContent h2,
+.markdownContent h3,
+.markdownContent h4,
+.markdownContent h5,
+.markdownContent h6 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.markdownContent h1 {
+  font-size: 1.25rem;
+}
+
+.markdownContent h2 {
+  font-size: 1.125rem;
+}
+
+.markdownContent h3 {
+  font-size: 1rem;
+}
+
+.markdownContent p {
+  margin-bottom: 0.75rem;
+}
+
+.markdownContent p:last-child {
+  margin-bottom: 0;
+}
+
+.markdownContent ul,
+.markdownContent ol {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.markdownContent li {
+  margin-bottom: 0.25rem;
+}
+
+.markdownContent blockquote {
+  border-left: 4px solid #e5e7eb;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: #6b7280;
+}
+
+.markdownContent code {
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+}
+
+.markdownContent pre {
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.markdownContent pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.markdownContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.markdownContent th,
+.markdownContent td {
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.markdownContent th {
+  background-color: #f9fafb;
+  font-weight: 600;
+}
+
+/* User message specific styling (for white text on colored background) */
+.markdownContentUser {
+  line-height: 1.6;
+  color: white;
+}
+
+.markdownContentUser h1,
+.markdownContentUser h2,
+.markdownContentUser h3,
+.markdownContentUser h4,
+.markdownContentUser h5,
+.markdownContentUser h6 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: white;
+}
+
+.markdownContentUser h1 {
+  font-size: 1.25rem;
+}
+
+.markdownContentUser h2 {
+  font-size: 1.125rem;
+}
+
+.markdownContentUser h3 {
+  font-size: 1rem;
+}
+
+.markdownContentUser p {
+  margin-bottom: 0.75rem;
+  color: white;
+}
+
+.markdownContentUser p:last-child {
+  margin-bottom: 0;
+}
+
+.markdownContentUser ul,
+.markdownContentUser ol {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  color: white;
+}
+
+.markdownContentUser li {
+  margin-bottom: 0.25rem;
+}
+
+.markdownContentUser blockquote {
+  border-left: 4px solid rgba(255, 255, 255, 0.3);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.markdownContentUser code {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: white;
+}
+
+.markdownContentUser pre {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.markdownContentUser pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.markdownContentUser table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.markdownContentUser th,
+.markdownContentUser td {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem;
+  text-align: left;
+  color: white;
+}
+
+.markdownContentUser th {
+  background-color: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+}
