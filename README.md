@@ -25,18 +25,31 @@ It works with prompts and files (TXT/PDF/DOCX).
 
 contract-risk-finder/
 ├── .github/ # GitHub workflows or issue templates
+
 ├── backend/ # Core backend logic (text extraction, model inference)
+
 ├── cli/ # Command-line interface (doc reading agent)
+
 ├── frontend/ # React frontend for file upload & result view
+
 ├── master-agent/ # GenAI orchestration logic
+
 ├── router/ # FastAPI route handlers
+
 ├── tests/ # Unit and integration tests
+
 ├── .gitignore
+
 ├── .pre-commit-config.yaml # Linting / formatting rules
+
 ├── LICENSE
+
 ├── Makefile
+
 ├── README-infrastructure.md # Infrastructure-level setup
+
 ├── README.md # You’re reading it!
+
 ├── docker-compose.yml # All-in-one multi-container setup
 
 ## Agent Workflow
