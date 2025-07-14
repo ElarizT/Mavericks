@@ -9,16 +9,15 @@ It works with prompts and files (TXT/PDF/DOCX).
 
 ## 🚀 Features
 
-📄 **Multi-format support**: Analyze .pdf, .docx, or .txt files
-
-🔍 **Clause risk detection** using GenAI
-✨ **Plain English clause simplification** via GenAI summarizer
-🧾 **Clean PDF report generation** - in progress
-🧠 **Fallback mode**: Rule-based keyword detection if model fails
-🖥️ **Frontend UI** for easy uploads & results
-🔌 **AgentOS integration** for orchestrated intelligence
-⚙️ **Dockerized microservices with docker-compose**
-🧪 **Unit + API tests** included
+- 📄 **Multi-format support**: Analyze .pdf, .docx, or .txt files
+- 🔍 **Clause risk detection** using GenAI
+- ✨ **Plain English clause simplification** via GenAI summarizer
+- 🧾 **Clean PDF report generation** - in progress
+- 🧠 **Fallback mode**: Rule-based keyword detection if model fails
+- 🖥️ **Frontend UI** for easy uploads & results
+- 🔌 **AgentOS integration** for orchestrated intelligence
+- ⚙️ **Dockerized microservices with docker-compose**
+- 🧪 **Unit + API tests** included
 
 ---
 
